@@ -26,10 +26,13 @@
 /* =====================
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
+
 var resetMap = function() {
   /* =====================
     Fill out this function definition
   ===================== */
+  _.each(myMarkers, function(marker) { map.removeLayer(marker); });
+  myMarkers = [];
 };
 
 /* =====================
@@ -37,10 +40,17 @@ var resetMap = function() {
   will be called as soon as the application starts. Be sure to parse your data once you've pulled
   it down!
 ===================== */
+var dataset = [];
 var getAndParseData = function() {
   /* =====================
     Fill out this function definition
   ===================== */
+  $.ajax("https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-crime-snippet.json").done(function(ajaxResponseValue){
+    var parsed = JSON.parse(ajaxResponseValue);
+    _.each(parsed, function(x){
+      dataset.push(x);
+    });
+  });
 };
 
 /* =====================
@@ -51,4 +61,36 @@ var plotData = function() {
   /* =====================
     Fill out this function definition
   ===================== */
+  // Criteria 1: Numeric filter: District (1~39)
+      // [1, 3, 6, 16, 18, 19, 22, 23, 24, 25, 26, 35, 39]
+  // Criteria 2: String filter: General Crime Category
+      //["Narcotic / Drug Law Violations", "All Other Offenses", "Thefts", "Other Assaults", "Rape", "Other Sex Offenses (Not Commercialized)", "Aggravated Assault No Firearm", "Theft from Vehicle", "Vandalism/Criminal Mischief", "DRIVING UNDER THE INFLUENCE", "Motor Vehicle Theft", "Burglary Residential", "Fraud", "Burglary Non-Residential", "Embezzlement", "Forgery and Counterfeiting", "Aggravated Assault Firearm", "Arson", "Robbery Firearm", "Disorderly Conduct", "Robbery No Firearm", "Homicide - Criminal", "Weapon Violations", "Liquor Law Violations", "Recovered Stolen Motor Vehicle", "Public Drunkenness", "Vagrancy/Loitering", "Offenses Against Family and Children", "Gambling Violations"]
+  // Criteria 3: Boolean filter: AM or PM
+
+  //Filter dataset: Create a list of "cleaned" filtered data
+  var filtered = _.filter(dataset, function(data){
+    return (_.isString(data.Coordinates)) // sort out dirty Coordinates
+            & (data.District >= numericField1 & data.District <= numericField2) // Criteria 1
+            & (data['General Crime Category'] == stringField) // Criteria 2
+            & ((data['Dispatch Date/Time'].includes("PM")) === booleanField); //Criteria 3
+  });
+
+  //A function that make markers
+  var makeMarkers = function(filtered) {
+    return _.map(filtered, function(data){
+            var split = data.Coordinates.split(", ");
+            var Lat = parseFloat(split[0].split("(")[1]);
+            var Lon = parseFloat(split[1].split(")")[0]);
+            return L.marker([Lat,Lon]);
+          });
+  };
+
+  //A function that plots markers
+  var plotMarkers = function(marker){
+    _.each(marker, function(x){x.addTo(map);});
+  };
+
+  //Call makeMarkers function & plotMarkers function
+  var markers = makeMarkers(filtered);
+  return plotMarkers(markers);
 };

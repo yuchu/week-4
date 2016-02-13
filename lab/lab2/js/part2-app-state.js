@@ -30,11 +30,19 @@
        var one = justOne();
 ===================== */
 
-var downloadData = $.ajax("");
-var parseData = function() {};
-var makeMarkers = function() {};
-var plotMarkers = function() {};
+var downloadData = $.ajax("https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-bike-crashes-snippet.json");
 
+var parseData = function(data){
+  return JSON.parse(data);
+};
+
+var makeMarkers = function(data) {
+  return _.map(data, function(x){return L.marker([x.LAT,x.LNG]);});
+};
+
+var plotMarkers = function(marker){
+  _.each(marker, function(x){x.addTo(map);});
+};
 
 /* =====================
   Define the function removeData so that it clears the markers you've written
@@ -49,7 +57,9 @@ var plotMarkers = function() {};
   user's input.
 ===================== */
 
-var removeMarkers = function() {};
+var removeMarkers = function(layer) {
+  _.each(layer, function(x){map.removeLayer(x);});
+};
 
 /* =====================
   Optional, stretch goal

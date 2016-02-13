@@ -10,7 +10,11 @@
 
   This recipe, given to underscore's _.filter will return only the elements we want.
 ===================== */
-var isLengthOfFiveOrMore = function(str) {};
+var isLengthOfFiveOrMore = function(str) {
+  if(str.length >= 5){
+    return true;
+  }
+};
 
 console.log("isLengthOfFiveOrMore success:",
   _.isEqual(_.filter(['this', 'is','a', 'test', 'testing'], isLengthOfFiveOrMore), ['testing']));
@@ -21,15 +25,18 @@ console.log("isLengthOfFiveOrMore success:",
   function you write along with underscore's _.each to log the double of every
   number in the provided array.
 ===================== */
-var logDouble = function(num) {};
+var logDouble = function(num) {
+  return num * 2;
+};
 var theArray = [1, 5, 20, 100];
 
+_.each(theArray, function(x){console.log(logDouble(x));});
 
 /* =====================
   Given this already defined function, define fizzbuzzArray so that, when mapped
   over, it will equal ['fizz', 'buzz', 'fizzbuzz'];
 ===================== */
-var fizzbuzzArray = [];
+var fizzbuzzArray = [3,5,'fizzbuzz'];
 var fizzbuzzFunc = function(num) {
   var str = '';
   if (num % 3 === 0) { str = 'fizz'; }
@@ -84,6 +91,12 @@ var phillySolarInstallationDataUrl = "https://raw.githubusercontent.com/CPLN690-
 var phillyCrimeDataUrl = "https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-crime-snippet.json";
 var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-bike-crashes-snippet.json";
 
+$.ajax(phillyBikeCrashesDataUrl).done(function(ajaxResponseValue) {
+  // a function that does some kind of transformation on the response
+  var computedValue = JSON.parse(ajaxResponseValue);
+  // Logging our computed result (within the body of the ajax function)
+  console.log(computedValue);
+});
 
 /* =====================
   Data you grab through ajax is just text. You'll need to parse it as javascript
