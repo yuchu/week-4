@@ -1,9 +1,150 @@
 body {
     padding: 0;
-    overflow: hidden;
+    overflow: scroll;
     font-family: helvetica, arial, sans-serif;
 }
 
 /* =================
 Add more styles here!
 ================= */
+.header{
+  background:#FFFFFF;
+  width:100%;
+  top:0;
+  position:fixed;
+  height:80px;
+}
+
+.content_container{
+  width: 960px;
+  max-width: 98%;
+  min-width: 768px;width: 960px;
+  margin:0 auto;
+}
+
+#logo{
+  float:left;
+  font-family:sans-serif;
+  font-size:15px;
+  color:#444444;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+
+a{
+  text-decoration: none;
+  color:#000000;
+}
+
+li a{
+  text-decoration: none;
+  color:#00cc99;
+}
+
+li a:hover{
+  color:#666666;
+}
+
+li{
+  list-style: none;
+  float:left;
+  margin:15px 20px;
+  font-size:10px;
+  letter-spacing: 1px;
+}
+
+.nav{
+  float:right;
+}
+
+.container1{
+  padding-top: 90px;
+  background-color:#F5F5F5;
+  height: 1043px;
+}
+
+.container2{
+  padding-top: 90px;
+  background-color:#E6E6E6;
+  height: 800px;
+}
+
+.clear-top{
+  clear:both;
+}
+
+.big-logo{
+  margin-top:20%;
+  font-family: sans-serif;
+  color:#444444;
+  margin-bottom: 50px;
+  width:100%;
+  text-align: center;
+}
+
+.big-logo h1{
+  font-size:90px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin:0px;
+}
+
+.big-logo h2{
+  font-size:30px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.button_1{
+  width:300px;
+  font-size:20px;
+  padding:11px 80px 11px;
+  margin:0 auto;
+  background-color:#0dc4a3;
+  border-radius: 5%;
+  color:#FFFFFF;
+}
+
+.button_2{
+  width:300px;
+  font-size:20px;
+  padding:11px 80px 11px;
+  margin:0 auto;
+  background-color:#666666;
+  border-radius: 5%;
+  color:#FFFFFF;
+}
+
+p{
+  margin: 4%;
+}
+
+p a:hover{
+  background-color:#444444;
+}
+
+.feature_content{
+  margin:10px 0;
+  font-family: sans-serif;
+  color:#444444;
+  width:100%;
+  text-align: center;
+}
+
+.feature_content h2{
+  font-size:30px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.column-one-quarter img{
+  width:170px;
+  width:170px;
+}
+
+.column-one-quarter h3{
+  font-size:16px;
+  letter-spacing: 1px;
+}

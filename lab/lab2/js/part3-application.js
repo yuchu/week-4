@@ -91,6 +91,6 @@ var plotData = function() {
   };
 
   //Call makeMarkers function & plotMarkers function
-  var markers = makeMarkers(filtered);
-  return plotMarkers(markers);
+  myMarkers = makeMarkers(filtered);
+  return plotMarkers(myMarkers);
 };
